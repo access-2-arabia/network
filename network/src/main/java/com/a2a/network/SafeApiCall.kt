@@ -1,8 +1,8 @@
 package com.a2a.network
 
 import com.a2a.network.exception.NoInternetException
- import com.a2a.network.exception.PasswordExpired
-import com.a2a.network.extenstion.BaseResponse
+import com.a2a.network.exception.PasswordExpired
+import com.a2a.network.model.BaseResponse
 import com.a2a.network.model.OTPResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -78,12 +78,18 @@ interface SafeApiCall {
                 }
 
             } catch (throwable: Throwable) {
-                when(throwable){
+                when (throwable) {
 
-                    is ConnectException ->Resource.Failure(NoInternetException(throwable),"No Internet")
-                    is UnknownHostException ->Resource.Failure(NoInternetException(throwable),"No Internet")
+                    is ConnectException -> Resource.Failure(
+                        NoInternetException(throwable),
+                        "No Internet"
+                    )
+                    is UnknownHostException -> Resource.Failure(
+                        NoInternetException(throwable),
+                        "No Internet"
+                    )
 
-                    else -> Resource.Failure(throwable,"Someting went wrong")
+                    else -> Resource.Failure(throwable, "Someting went wrong")
                 }
 
             }

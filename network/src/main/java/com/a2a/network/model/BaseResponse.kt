@@ -1,9 +1,9 @@
-package com.a2a.network.extenstion
+package com.a2a.network.model
 
-import com.a2a.network.model.Result
 import com.google.gson.annotations.SerializedName
 
-open class BaseResponse (
+open class BaseResponse(
+
     @SerializedName("A2AResponse")
     var a2AResponse: A2AResponse? = A2AResponse()
 ) {

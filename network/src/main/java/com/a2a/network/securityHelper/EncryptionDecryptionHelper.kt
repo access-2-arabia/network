@@ -1,7 +1,6 @@
 package com.a2a.network.securityHelper
 
 
-
 class EncryptionDecryptionHelper() {
 
     fun encryptData(data: String?, key: String?): String {
@@ -23,7 +22,7 @@ class EncryptionDecryptionHelper() {
     }
 
 
-     fun decryptData(data: String?, key: String?): String {
+    fun decryptData(data: String?, key: String?): String {
         var key = key
         return if (key != null && !key.isEmpty()) {
 

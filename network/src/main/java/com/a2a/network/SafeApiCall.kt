@@ -1,7 +1,6 @@
 package com.a2a.network
 
-import com.a2a.network.exception.NoInternetException
-import com.a2a.network.exception.PasswordExpired
+import com.a2a.network.exception.*
 import com.a2a.network.model.BaseResponse
 import com.a2a.network.model.OTPResponse
 import com.google.gson.Gson
@@ -52,24 +51,82 @@ interface SafeApiCall {
                 if (response?.errorCode != 0) {
 
                     when (response?.errorCode) {
-                        -5 -> {
+                        16 -> {
 
-                            Resource.Failure(
-                                PasswordExpired(Throwable(), response, body),
-                                errorMessage
+                            throw SessionTimeOut(
+                                Throwable("Session Time Out"),
+                                response, body
                             )
                         }
                         -6 -> {
 
-                            Resource.Failure(
-                                PasswordExpired(Throwable(), response, body),
-                                errorMessage
+                            throw PasswordExpired(
+                                Throwable("Password Expired"),
+                                response,
+                                body,
+                            )
+                        }
+
+                        237 -> {
+
+                            throw FirstLogin(
+                                Throwable("First Login"),
+                                response,
+                                body,
+                            )
+                        }
+                        -5 -> {
+
+                            throw PasswordExpired(
+                                Throwable("Password Expired"),
+                                response,
+                                body,
+                            )
+                        }
+                        9 -> {
+                            throw InvalidPassword(
+                                Throwable("Password fields"),
+                                response
+                            )
+
+                        }
+                        10 -> {
+                            throw InvalidPIN(
+                                Throwable("PIN fields"),
+                                response
+                            )
+                        }
+                        5 -> {
+                            throw CannotFindCustomer(
+                                Throwable("EE5 Cannot Find Customer"),
+                                response
+                            )
+                        }
+
+                        -2 -> {
+                            throw OTPNeeded(Throwable("Need OTP"), response, body)
+                        }
+                        5421 -> {
+                            throw BiomtricChanged(Throwable("BiomtricChanged"), response, body)
+                        }
+
+                        5110 -> {
+                            throw NoHistoryException(
+                                error = Throwable("Response Error"),
+                                result = response
+                            )
+                        }
+                        5044 -> {
+                            throw InvalidPIN(
+                                error = Throwable("Response Error"),
+                                result = response
                             )
                         }
                         else -> {
                             Resource.Failure(
                                 PasswordExpired(Throwable(), response, body),
-                                errorMessage
+                                errorMessage,
+                                request
                             )
                         }
                     }
@@ -82,14 +139,15 @@ interface SafeApiCall {
 
                     is ConnectException -> Resource.Failure(
                         NoInternetException(throwable),
-                        "No Internet"
+                        "No Internet",
+                        request
                     )
                     is UnknownHostException -> Resource.Failure(
                         NoInternetException(throwable),
-                        "No Internet"
+                        "No Internet", request
                     )
 
-                    else -> Resource.Failure(throwable, "Someting went wrong")
+                    else -> Resource.Failure(throwable, "Someting went wrong", request)
                 }
 
             }

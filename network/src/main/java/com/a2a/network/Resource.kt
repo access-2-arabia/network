@@ -3,9 +3,10 @@ package com.a2a.network
 
 sealed class Resource<out T> {
     data class Success<out T>(val value: T) : Resource<T>()
-    data class Failure(
+    data class Failure<out T>(
         val throwable: Throwable,
-        val errorBody: String
+        val errorMessage: String,
+        val request:T
     ) : Resource<Nothing>()
 
     object Loading : Resource<Nothing>()

@@ -37,12 +37,6 @@ interface SafeApiCall {
                     BaseResponse::class.java
                 ).a2AResponse?.header?.result
 
-                val body = Gson().fromJson(
-                    Gson().toJson(apiResponse),
-                    OTPResponse::class.java
-                ).a2AResponse
-
-
                 val errorMessage =
                     if (Locale.getDefault().language == "en") response?.eDesc
                         ?: "" else response?.aDesc
@@ -52,141 +46,110 @@ interface SafeApiCall {
                     when (response?.errorCode) {
                         16 -> {
                             Resource.Failure(
-                                SessionTimeOut(
-                                    Throwable(),
-                                    response, body
-                                ),
+                                SessionTimeOut(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
 
 
                         }
                         -6 -> {
                             Resource.Failure(
-                                PasswordExpired(
-                                    Throwable(),
-                                    response,
-                                    body,
-                                ),
+                                PasswordExpired(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
 
                         }
 
                         237 -> {
                             Resource.Failure(
-                                FirstLogin(
-                                    Throwable(),
-                                    response,
-                                    body,
-                                ),
+                                FirstLogin(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
 
                         }
                         -5 -> {
                             Resource.Failure(
-                                PasswordExpired(
-                                    Throwable(),
-                                    response,
-                                    body,
-                                ),
+                                PasswordExpired(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
 
                         }
                         9 -> {
                             Resource.Failure(
-                                InvalidPassword(
-                                    Throwable(),
-                                    response,
-                                    body,
-                                ),
+                                InvalidPassword(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
 
 
                         }
                         10 -> {
                             Resource.Failure(
-                                InvalidPIN(
-                                    Throwable(),
-                                    response,
-                                    body,
-                                ),
+                                InvalidPIN(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
 
                         }
                         5 -> {
                             Resource.Failure(
-                                CannotFindCustomer(
-                                    Throwable(),
-                                    response,
-                                    body,
-                                ),
+                                CannotFindCustomer(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
 
                         }
 
                         -2 -> {
                             Resource.Failure(
-                                OTPNeeded(
-                                    Throwable(),
-                                    response,
-                                    body
-                                ),
+                                OTPNeeded(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
 
                         }
                         5421 -> {
                             Resource.Failure(
-                                BiomtricChanged(
-                                    Throwable(),
-                                    response,
-                                    body
-                                ),
+                                BiomtricChanged(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
                         }
                         5110 -> {
                             Resource.Failure(
-                                NoHistoryException(
-                                    Throwable(),
-                                    response,
-                                    body,
-                                ),
+                                NoHistoryException(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
                         }
                         5044 -> {
                             Resource.Failure(
-                                InvalidPIN(
-                                    Throwable(),
-                                    response,
-                                    body
-                                ),
+                                InvalidPIN(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
                         }
                         else -> {
                             Resource.Failure(
-                                PasswordExpired(Throwable(), response, body),
+                                PasswordExpired(Throwable()),
                                 errorMessage,
-                                request
+                                request,
+                                apiResponse
                             )
                         }
                     }
@@ -200,14 +163,16 @@ interface SafeApiCall {
                     is ConnectException -> Resource.Failure(
                         NoInternetException(throwable),
                         "No Internet",
-                        request
+                        request,
+                        null
                     )
                     is UnknownHostException -> Resource.Failure(
                         NoInternetException(throwable),
-                        "No Internet", request
+                        "No Internet", request,
+                        null
                     )
 
-                    else -> Resource.Failure(throwable, "Something went wrong", request)
+                    else -> Resource.Failure(throwable, "Something went wrong", request,null)
                 }
 
             }

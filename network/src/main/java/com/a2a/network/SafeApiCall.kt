@@ -51,74 +51,135 @@ interface SafeApiCall {
 
                     when (response?.errorCode) {
                         16 -> {
-
-                            throw SessionTimeOut(
-                                Throwable(),
-                                response, body
+                            Resource.Failure(
+                                SessionTimeOut(
+                                    Throwable(),
+                                    response, body
+                                ),
+                                errorMessage,
+                                request
                             )
+
+
                         }
                         -6 -> {
-
-                            throw PasswordExpired(
-                                Throwable(),
-                                response,
-                                body,
+                            Resource.Failure(
+                                PasswordExpired(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                errorMessage,
+                                request
                             )
+
                         }
 
                         237 -> {
-
-                            throw FirstLogin(
-                                Throwable(),
-                                response,
-                                body,
+                            Resource.Failure(
+                                FirstLogin(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                errorMessage,
+                                request
                             )
+
                         }
                         -5 -> {
-
-                            throw PasswordExpired(
-                                Throwable(),
-                                response,
-                                body,
+                            Resource.Failure(
+                                PasswordExpired(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                errorMessage,
+                                request
                             )
+
                         }
                         9 -> {
-                            throw InvalidPassword(
-                                Throwable(),
-                                response, body
+                            Resource.Failure(
+                                InvalidPassword(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                errorMessage,
+                                request
                             )
+
 
                         }
                         10 -> {
-                            throw InvalidPIN(
-                                Throwable(),
-                                response, body
+                            Resource.Failure(
+                                InvalidPIN(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                errorMessage,
+                                request
                             )
+
                         }
                         5 -> {
-                            throw CannotFindCustomer(
-                                Throwable(),
-                                response, body
+                            Resource.Failure(
+                                CannotFindCustomer(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                errorMessage,
+                                request
                             )
+
                         }
 
                         -2 -> {
-                            throw OTPNeeded(Throwable(), response, body)
+                            Resource.Failure(
+                                OTPNeeded(
+                                    Throwable(),
+                                    response,
+                                    body
+                                ),
+                                errorMessage,
+                                request
+                            )
+
                         }
                         5421 -> {
-                            throw BiomtricChanged(Throwable(), response, body)
+                            Resource.Failure(
+                                BiomtricChanged(
+                                    Throwable(),
+                                    response,
+                                    body
+                                ),
+                                errorMessage,
+                                request
+                            )
                         }
-
                         5110 -> {
-                            throw NoHistoryException(
-                                Throwable(),
-                                response, body
+                            Resource.Failure(
+                                NoHistoryException(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                errorMessage,
+                                request
                             )
                         }
                         5044 -> {
-                            throw InvalidPIN(
-                                Throwable(),
-                                response, body
+                            Resource.Failure(
+                                InvalidPIN(
+                                    Throwable(),
+                                    response,
+                                    body
+                                ),
+                                errorMessage,
+                                request
                             )
                         }
                         else -> {

@@ -37,7 +37,6 @@ interface SafeApiCall {
                     BaseResponse::class.java
                 ).a2AResponse?.header?.result
 
-
                 val body = Gson().fromJson(
                     Gson().toJson(apiResponse),
                     OTPResponse::class.java
@@ -54,14 +53,14 @@ interface SafeApiCall {
                         16 -> {
 
                             throw SessionTimeOut(
-                                Throwable("Session Time Out"),
+                                Throwable(),
                                 response, body
                             )
                         }
                         -6 -> {
 
                             throw PasswordExpired(
-                                Throwable("Password Expired"),
+                                Throwable(),
                                 response,
                                 body,
                             )
@@ -70,7 +69,7 @@ interface SafeApiCall {
                         237 -> {
 
                             throw FirstLogin(
-                                Throwable("First Login"),
+                                Throwable(),
                                 response,
                                 body,
                             )
@@ -78,48 +77,48 @@ interface SafeApiCall {
                         -5 -> {
 
                             throw PasswordExpired(
-                                Throwable("Password Expired"),
+                                Throwable(),
                                 response,
                                 body,
                             )
                         }
                         9 -> {
                             throw InvalidPassword(
-                                Throwable("Password fields"),
-                                response
+                                Throwable(),
+                                response, body
                             )
 
                         }
                         10 -> {
                             throw InvalidPIN(
-                                Throwable("PIN fields"),
-                                response
+                                Throwable(),
+                                response, body
                             )
                         }
                         5 -> {
                             throw CannotFindCustomer(
-                                Throwable("EE5 Cannot Find Customer"),
-                                response
+                                Throwable(),
+                                response, body
                             )
                         }
 
                         -2 -> {
-                            throw OTPNeeded(Throwable("Need OTP"), response, body)
+                            throw OTPNeeded(Throwable(), response, body)
                         }
                         5421 -> {
-                            throw BiomtricChanged(Throwable("BiomtricChanged"), response, body)
+                            throw BiomtricChanged(Throwable(), response, body)
                         }
 
                         5110 -> {
                             throw NoHistoryException(
-                                error = Throwable("Response Error"),
-                                result = response
+                                Throwable(),
+                                response, body
                             )
                         }
                         5044 -> {
                             throw InvalidPIN(
-                                error = Throwable("Response Error"),
-                                result = response
+                                Throwable(),
+                                response, body
                             )
                         }
                         else -> {
@@ -147,7 +146,7 @@ interface SafeApiCall {
                         "No Internet", request
                     )
 
-                    else -> Resource.Failure(throwable, "Someting went wrong", request)
+                    else -> Resource.Failure(throwable, "Something went wrong", request)
                 }
 
             }

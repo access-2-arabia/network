@@ -43,7 +43,7 @@ interface SafeApiCall {
                 ).a2AResponse
 
 
-                val errorMessage =
+                val message =
                     if (Locale.getDefault().language == "en") response?.eDesc
                         ?: "" else response?.aDesc
                         ?: ""
@@ -54,9 +54,9 @@ interface SafeApiCall {
                             Resource.Failure(
                                 SessionTimeOut(
                                     Throwable(),
-                                    apiResponse, body
+                                    response, body
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
 
@@ -69,7 +69,7 @@ interface SafeApiCall {
                                     response,
                                     body,
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
 
@@ -82,7 +82,7 @@ interface SafeApiCall {
                                     response,
                                     body,
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
 
@@ -94,7 +94,7 @@ interface SafeApiCall {
                                     response,
                                     body,
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
 
@@ -106,7 +106,7 @@ interface SafeApiCall {
                                     response,
                                     body,
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
 
@@ -119,7 +119,7 @@ interface SafeApiCall {
                                     response,
                                     body,
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
 
@@ -131,7 +131,7 @@ interface SafeApiCall {
                                     response,
                                     body,
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
 
@@ -144,7 +144,7 @@ interface SafeApiCall {
                                     response,
                                     body
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
 
@@ -156,7 +156,7 @@ interface SafeApiCall {
                                     response,
                                     body
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
                         }
@@ -167,7 +167,7 @@ interface SafeApiCall {
                                     response,
                                     body,
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
                         }
@@ -178,20 +178,20 @@ interface SafeApiCall {
                                     response,
                                     body
                                 ),
-                                errorMessage,
+                                message,
                                 request
                             )
                         }
                         else -> {
                             Resource.Failure(
                                 PasswordExpired(Throwable(), response, body),
-                                errorMessage,
+                                message,
                                 request
                             )
                         }
                     }
                 } else {
-                    Resource.Success(apiResponse)
+                    Resource.Success(apiResponse ,message)
                 }
 
             } catch (throwable: Throwable) {

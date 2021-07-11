@@ -1,6 +1,6 @@
 package com.a2a.network
 
- import com.a2a.network.exception.*
+import com.a2a.network.exception.*
 import com.a2a.network.model.BaseResponse
 import com.a2a.network.model.OTPResponse
 import com.google.gson.Gson
@@ -14,7 +14,6 @@ import java.util.*
 interface SafeApiCall {
     suspend fun <REQUEST, API_CALL> safeApiCall(
         request: REQUEST,
-        responseClass: Class<Any>,
         apiCall: suspend () -> API_CALL
     ): Resource<API_CALL> {
         return withContext(Dispatchers.IO) {
@@ -42,10 +41,6 @@ interface SafeApiCall {
                     Gson().toJson(apiResponse),
                     OTPResponse::class.java
                 ).a2AResponse
-                val responseBody = Gson().fromJson(
-                    Gson().toJson(apiResponse),
-                    responseClass
-                )
 
 
                 val message =
@@ -196,7 +191,7 @@ interface SafeApiCall {
                         }
                     }
                 } else {
-                    Resource.Success(apiResponse, message)
+                    Resource.Success(apiResponse ,message)
                 }
 
             } catch (throwable: Throwable) {

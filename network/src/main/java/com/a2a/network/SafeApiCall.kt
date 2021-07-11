@@ -12,8 +12,9 @@ import java.util.*
 
 
 interface SafeApiCall {
-    suspend fun <REQUEST, API_CALL> safeApiCall(
+    suspend fun <REQUEST, API_CALL, RESPONSE_CLASS> safeApiCall(
         request: REQUEST,
+        responseClass: Class<RESPONSE_CLASS>,
         apiCall: suspend () -> API_CALL
     ): Resource<API_CALL> {
         return withContext(Dispatchers.IO) {
@@ -41,6 +42,10 @@ interface SafeApiCall {
                     Gson().toJson(apiResponse),
                     OTPResponse::class.java
                 ).a2AResponse
+                val responseBody = Gson().fromJson(
+                    Gson().toJson(apiResponse),
+                    responseClass
+                )
 
 
                 val message =
@@ -191,7 +196,7 @@ interface SafeApiCall {
                         }
                     }
                 } else {
-                    Resource.Success(apiResponse ,message)
+                    Resource.Success(apiResponse, message,responseBody)
                 }
 
             } catch (throwable: Throwable) {

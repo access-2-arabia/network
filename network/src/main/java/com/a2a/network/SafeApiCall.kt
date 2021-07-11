@@ -16,7 +16,7 @@ interface SafeApiCall {
         request: REQUEST,
         responseClass: Class<RESPONSE_CLASS>,
         apiCall: suspend () -> API_CALL
-    ): Resource<API_CALL> {
+    ): Resource<RESPONSE_CLASS> {
         return withContext(Dispatchers.IO) {
             try {
 
@@ -196,7 +196,7 @@ interface SafeApiCall {
                         }
                     }
                 } else {
-                    Resource.Success(apiResponse, message,responseBody?:"")
+                    Resource.Success(responseBody, message)
                 }
 
             } catch (throwable: Throwable) {

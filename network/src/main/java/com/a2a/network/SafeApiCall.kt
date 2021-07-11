@@ -1,5 +1,6 @@
 package com.a2a.network
 
+import com.a2a.network.Resource
 import com.a2a.network.exception.*
 import com.a2a.network.model.BaseResponse
 import com.a2a.network.model.OTPResponse
@@ -11,12 +12,12 @@ import java.net.UnknownHostException
 import java.util.*
 
 
-interface SafeApiCall {
-    suspend fun <REQUEST, API_CALL, RESPONSE_CLASS> safeApiCall(
+interface SafeApiCallTEST {
+    suspend fun <REQUEST, API_CALL> safeApiCall(
         request: REQUEST,
-        responseClass: Class<RESPONSE_CLASS>,
+        responseClass: Class<Any>,
         apiCall: suspend () -> API_CALL
-    ): Resource<RESPONSE_CLASS> {
+    ): Resource<API_CALL> {
         return withContext(Dispatchers.IO) {
             try {
 
@@ -196,7 +197,7 @@ interface SafeApiCall {
                         }
                     }
                 } else {
-                    Resource.Success(responseBody, message)
+                    Resource.Success(apiResponse, message)
                 }
 
             } catch (throwable: Throwable) {

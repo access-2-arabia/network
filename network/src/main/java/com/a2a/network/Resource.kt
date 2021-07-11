@@ -2,11 +2,12 @@ package com.a2a.network
 
 
 sealed class Resource<out T> {
-    data class Success<out API_RESPONSE, RESPONSE_BODY>(
-        val value: API_RESPONSE,
+    data class Success<out T>(
+        val value: T,
         val successMessage: String,
-        val responseBody: RESPONSE_BODY
-    ) : Resource<API_RESPONSE>()
+        val responseBody: Any
+    ) :
+        Resource<T>()
 
     data class Failure<out REQUEST>(
         val throwable: Throwable,

@@ -196,7 +196,7 @@ interface SafeApiCall {
                         }
                     }
                 } else {
-                    Resource.Success(apiResponse, message,responseBody)
+                    Resource.Success(apiResponse, message,responseBody?:"")
                 }
 
             } catch (throwable: Throwable) {

@@ -1,7 +1,6 @@
 package com.a2a.network
 
-import com.a2a.network.Resource
-import com.a2a.network.exception.*
+ import com.a2a.network.exception.*
 import com.a2a.network.model.BaseResponse
 import com.a2a.network.model.OTPResponse
 import com.google.gson.Gson
@@ -12,7 +11,7 @@ import java.net.UnknownHostException
 import java.util.*
 
 
-interface SafeApiCallTEST {
+interface SafeApiCall {
     suspend fun <REQUEST, API_CALL> safeApiCall(
         request: REQUEST,
         responseClass: Class<Any>,

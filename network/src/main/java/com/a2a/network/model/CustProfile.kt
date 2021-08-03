@@ -93,6 +93,8 @@ data class CustProfile(
     @SerializedName("CustMnemonicOld")
     var custMnemonicOld: String = "",
     @SerializedName("CustMnemonicNew")
-    var custMnemonicNew: String = ""
+    var custMnemonicNew: String = "",
+    @SerializedName("custStatus")
+    var custStatus: String = ""
 
 ) : Parcelable

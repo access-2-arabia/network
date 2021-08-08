@@ -94,7 +94,7 @@ data class CustProfile(
     var custMnemonicOld: String = "",
     @SerializedName("CustMnemonicNew")
     var custMnemonicNew: String = "",
-    @SerializedName("custStatus")
+    @SerializedName("CustStatus")
     var custStatus: String = "true",
     @SerializedName("BuildingNo")
     var buildingNo: String = ""

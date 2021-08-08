@@ -95,7 +95,9 @@ data class CustProfile(
     @SerializedName("CustMnemonicNew")
     var custMnemonicNew: String = "",
     @SerializedName("CustStatus")
-    var custStatus: String = "",
+    var custStatus: String = "true",
+    @SerializedName("BuildingNo")
+    var buildingNo: String = "",
     @SerializedName("AFName")
     var AFName: String = "",
     @SerializedName("ALName")
@@ -112,6 +114,4 @@ data class CustProfile(
     var EMName: String = "",
     @SerializedName("PostZip")
     var StreetAddress: String = ""
-
-
 ) : Parcelable

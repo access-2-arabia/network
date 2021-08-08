@@ -94,7 +94,24 @@ data class CustProfile(
     var custMnemonicOld: String = "",
     @SerializedName("CustMnemonicNew")
     var custMnemonicNew: String = "",
-    @SerializedName("custStatus")
-    var custStatus: String = ""
+    @SerializedName("CustStatus")
+    var custStatus: String = "",
+    @SerializedName("AFName")
+    var AFName: String = "",
+    @SerializedName("ALName")
+    var ALName: String = "",
+    @SerializedName("AMName")
+    var AMName: String = "",
+    @SerializedName("DocDesc")
+    var DocDesc: String = "",
+    @SerializedName("EFName")
+    var EFName: String = "",
+    @SerializedName("ELName")
+    var ELName: String = "",
+    @SerializedName("EMName")
+    var EMName: String = "",
+    @SerializedName("PostZip")
+    var StreetAddress: String = ""
+
 
 ) : Parcelable

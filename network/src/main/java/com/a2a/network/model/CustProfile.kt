@@ -59,7 +59,7 @@ data class CustProfile(
     @SerializedName("ISOCode")
     var iSOCode: String = "",
     @SerializedName("Gender")
-    var gender: Boolean = true,
+    var gender: String = "",
     @SerializedName("ISOCode2")
     var iSOCode2: String = "",
     @SerializedName("LWPT")

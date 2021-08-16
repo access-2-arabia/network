@@ -1,8 +1,11 @@
 package com.a2a.network.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class CustProfile(
     @SerializedName("AFName")
     var aFName: String = "",
@@ -98,4 +101,4 @@ data class CustProfile(
     var streetAddress: String = "",
     @SerializedName("TermsAndCondition")
     var termsAndCondition: Int = 0
-)
+):Parcelable

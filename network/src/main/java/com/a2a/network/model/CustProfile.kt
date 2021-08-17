@@ -36,7 +36,7 @@ data class CustProfile(
     @SerializedName("CustID")
     var custID: String = "",
     @SerializedName("CustImage")
-    var custImage: Any = Any(),
+    var custImage: String = "",
     @SerializedName("CustMnemonic")
     var custMnemonic: String = "",
     @SerializedName("CustStatus")

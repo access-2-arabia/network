@@ -30,6 +30,8 @@ data class OTPResponse(
             var serviceConfiguration: ServiceConfiguration = ServiceConfiguration(),
             @SerializedName("CustProfile")
             var custProfile: CustProfile = CustProfile(),
+            @SerializedName("mtcn")
+            var mtcn: String = "",
 
             ) : Parcelable {
             @Parcelize

@@ -32,8 +32,11 @@ data class OTPResponse(
             var custProfile: CustProfile = CustProfile(),
             @SerializedName("mtcn")
             var mtcn: String = "",
+            @SerializedName("CustId")
+            var custId: String = ""
 
-            ) : Parcelable {
+
+        ) : Parcelable {
             @Parcelize
             data class Authenticate(
                 @SerializedName("UTR")

@@ -102,7 +102,7 @@ data class CustProfile(
     @SerializedName("TermsAndCondition")
     var termsAndCondition: Int = 0,
     @SerializedName("Password")
-    var password: Int = 0,
+    var password: String = "",
     @SerializedName("PasswordOld")
-    var passwordOld: Int = 0
-):Parcelable
+    var passwordOld: String = ""
+) : Parcelable

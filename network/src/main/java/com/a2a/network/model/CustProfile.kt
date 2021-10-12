@@ -100,5 +100,9 @@ data class CustProfile(
     @SerializedName("StreetAddress")
     var streetAddress: String = "",
     @SerializedName("TermsAndCondition")
-    var termsAndCondition: Int = 0
+    var termsAndCondition: Int = 0,
+    @SerializedName("Password")
+    var password: Int = 0,
+    @SerializedName("PasswordOld")
+    var passwordOld: Int = 0
 ):Parcelable

@@ -182,6 +182,18 @@ interface SafeApiCall {
                                 request
                             )
                         }
+                        5024 -> {
+                            Resource.Failure(
+                                InvalidPassword(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                message,
+                                request
+                            )
+
+                        }
                         else -> {
                             Resource.Failure(
                                 PasswordExpired(Throwable(), response, body),
@@ -191,7 +203,7 @@ interface SafeApiCall {
                         }
                     }
                 } else {
-                    Resource.Success(apiResponse ,message)
+                    Resource.Success(apiResponse, message)
                 }
 
             } catch (throwable: Throwable) {

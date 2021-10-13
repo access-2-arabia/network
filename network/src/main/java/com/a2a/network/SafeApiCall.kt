@@ -192,11 +192,14 @@ interface SafeApiCall {
                                 message,
                                 request
                             )
-
                         }
                         else -> {
                             Resource.Failure(
-                                PasswordExpired(Throwable(), response, body),
+                                InvalidPIN(
+                                    Throwable(),
+                                    response,
+                                    body
+                                ),
                                 message,
                                 request
                             )

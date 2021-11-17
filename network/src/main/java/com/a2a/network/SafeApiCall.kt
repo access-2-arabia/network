@@ -193,6 +193,18 @@ interface SafeApiCall {
                                 request
                             )
                         }
+
+                        -999 -> {
+                            Resource.Failure(
+                                eFawatercomError(
+                                    Throwable(),
+                                    response,
+                                    body,
+                                ),
+                                message,
+                                request
+                            )
+                        }
                         else -> {
                             Resource.Failure(
                                 InvalidPIN(

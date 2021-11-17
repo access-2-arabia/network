@@ -111,3 +111,9 @@ data class TokenExpire(
     val result: Result?,
     val response: OTPResponse.A2AResponse
 ) : RequestException(error = error)
+
+data class eFawatercomError(
+    val error: Throwable,
+    val result: Result?,
+    val response: OTPResponse.A2AResponse
+) : RequestException(error = error)

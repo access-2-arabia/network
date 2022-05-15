@@ -33,7 +33,9 @@ data class OTPResponse(
             @SerializedName("mtcn")
             var mtcn: String = "",
             @SerializedName("CustId")
-            var custId: String = ""
+            var custId: String = "",
+            @SerializedName("RecordId")
+            var recordId: String = ""
 
 
         ) : Parcelable {

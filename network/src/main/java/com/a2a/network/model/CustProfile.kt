@@ -108,13 +108,13 @@ data class CustProfile(
 
     //paypal Data
     @SerializedName("City")
-    var City: String = "",
+    var City: String? = null,
     @SerializedName("Country")
-    var Country: String = "",
+    var Country: String? = null,
     @SerializedName("EAddress1")
-    var EAddress1: String = "",
+    var EAddress1: String? = null,
     @SerializedName("EAddress2")
-    var EAddress2: String = "",
+    var EAddress2: String? = null,
     @SerializedName("MobNo")
-    var MobNo: String = ""
+    var MobNo: String? = null
 ) : Parcelable

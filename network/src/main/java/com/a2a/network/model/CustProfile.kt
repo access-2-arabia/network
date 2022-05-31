@@ -104,5 +104,17 @@ data class CustProfile(
     @SerializedName("Password")
     var password: String = "",
     @SerializedName("PasswordOld")
-    var passwordOld: String = ""
+    var passwordOld: String = "",
+
+    //paypal Data
+    @SerializedName("City")
+    var City: String = "",
+    @SerializedName("Country")
+    var Country: String = "",
+    @SerializedName("EAddress1")
+    var EAddress1: String = "",
+    @SerializedName("EAddress2")
+    var EAddress2: String = "",
+    @SerializedName("MobNo")
+    var MobNo: String = ""
 ) : Parcelable
